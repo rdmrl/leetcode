@@ -1,0 +1,11 @@
+{
+  "name": "0001_two_sum",
+  "version": "1.0.0",
+  "description": "Return the indices of two numbers in an array that add up to target.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "author": "rdmrl <ravi.damarla@gmail.com>",
+  "license": "ISC"
+}

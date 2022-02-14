@@ -26,7 +26,11 @@ module.exports = {
     return nextNode;
   },
 
-  printList: function( list ) {
+  toArray: function( list ) {
+    if ( list === undefined ) {
+      return;
+    }
+
     let values = [];
 
     let node = list;
@@ -35,6 +39,11 @@ module.exports = {
       node = node.next;
     } while ( node );
 
-    console.log( values );
+    return values;
+  },
+
+  printList: function( list, label = 'printList:' ) {
+    const values = module.exports.toArray( list );
+    console.log( label, values );
   }
 };

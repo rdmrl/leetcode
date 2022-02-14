@@ -1,0 +1,12 @@
+{
+  "name": "0002_add_two_numbers",
+  "version": "1.0.0",
+  "description": "Adds two numbers represented as singly linked lists.",
+  "main": "add_two_numbers.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

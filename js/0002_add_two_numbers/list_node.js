@@ -2,23 +2,39 @@
  * Definition for singly-linked list.
  */
 class ListNode {
-  constructor(val, next) {
+  constructor( val, next ) {
     this.val = ( val === undefined ? 0 : val );
     this.next = ( next === undefined ? null : next );
   }
 };
 
-let buildList = function ( inputArray ) {
-  // Create a node with the last number in the input array.
-  let nextNode = new ListNode( inputArray[ inputArray.length - 1 ];
+module.exports = {
+  buildList: function( inputArray ) {
 
-  for ( let ix = inputArray.length; ix >= 0; ix-- ) {
-    nextNode = new ListNode( inputArray[ix], nextNode );
+    // The next node in the list. Initially null to be used with the 
+    // last node in the list.
+    let nextNode;
+
+    // Start with the last element in the array and work backwards
+    // to build the list.
+    for ( let ix = inputArray.length - 1; ix >= 0; ix-- ) {
+      // Assign the previously created node as the next in the list.
+      nextNode = new ListNode( inputArray[ ix ], nextNode );
+    }
+
+    // Return the first node in the LinkedList.
+    return nextNode;
+  },
+
+  printList: function( list ) {
+    let values = [];
+
+    let node = list;
+    do {
+      values.push( node.val );
+      node = node.next;
+    } while ( node );
+
+    console.log( values );
   }
 };
-
-let iterateList = function ( list ) {
-  
-};
-
-export { ListNode, buildList };

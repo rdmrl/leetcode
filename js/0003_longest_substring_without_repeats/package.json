@@ -1,0 +1,12 @@
+{
+  "name": "0003_longest_substring_without_repeats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

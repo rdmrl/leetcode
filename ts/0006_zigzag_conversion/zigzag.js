@@ -13,25 +13,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * =====
  */
 function convert(s, numRows) {
+    if (numRows === 1) {
+        // Don't need to format the string.
+        return s;
+    }
     const numChars = s.length;
     const charsPerBlock = (numRows * 2) - 2;
-    console.log('numChars:', numChars, 'charsPerBlock:', charsPerBlock);
-    let output = new Array(numChars);
     const lastRowIx = numRows - 1;
+    // console.log('numChars:', numChars, 'charsPerBlock:', charsPerBlock);
+    let output = new Array(numChars);
     let outIx = 0;
     for (let rowIx = 0; rowIx < numRows; rowIx++) {
         let charIx = 0;
         let colIx = 0;
+        // console.log('charIx:', charIx, 'numChars', numChars);
         while (charIx < numChars) {
             if (colIx === 0) {
                 // The first column in each row.
                 charIx = rowIx;
-                console.log('rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx);
             }
             else {
                 if (rowIx === 0 || rowIx === lastRowIx) {
                     charIx += (charsPerBlock);
-                    console.log('rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx);
                 }
                 else {
                     let colOffset = 0;
@@ -42,15 +45,11 @@ function convert(s, numRows) {
                         colOffset = charsPerBlock - (2 * rowIx);
                     }
                     charIx += colOffset;
-                    console.log('rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx, 'colOffset:', colOffset);
                 }
             }
             colIx++;
             if (charIx < numChars) {
                 output[outIx++] = s[charIx];
-            }
-            else {
-                console.log('exceeding numChars:', charIx);
             }
         }
     }

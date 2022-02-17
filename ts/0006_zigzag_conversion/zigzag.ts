@@ -11,50 +11,47 @@
  * =====
  */
 export default function convert(s: string, numRows: number): string {
+  if (numRows === 1) {
+    // Don't need to format the string.
+    return s;
+  }
+
   const numChars = s.length;
-  const charsPerBlock = ( numRows * 2 ) - 2;
-
-  console.log( 'numChars:', numChars, 'charsPerBlock:', charsPerBlock );
-
-  let output: Array<string> = new Array<string>( numChars );
-
+  const charsPerBlock = numRows * 2 - 2;
   const lastRowIx = numRows - 1;
+
+  let output: Array<string> = new Array<string>(numChars);
   let outIx = 0;
 
-  for(let rowIx = 0; rowIx < numRows; rowIx++) {
-
+  for (let rowIx = 0; rowIx < numRows; rowIx++) {
     let charIx = 0;
     let colIx = 0;
 
-    while ( charIx < numChars ) {
-      if( colIx === 0 ) {
+    while (charIx < numChars) {
+      if (colIx === 0) {
         // The first column in each row.
         charIx = rowIx;
-        console.log( 'rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx );
       } else {
-        if ( rowIx === 0 || rowIx === lastRowIx ) {
-          charIx += (charsPerBlock);
-          console.log( 'rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx );
+        if (rowIx === 0 || rowIx === lastRowIx) {
+          charIx += charsPerBlock;
         } else {
           let colOffset = 0;
-          if ( (colIx % 2) === 0 ) {
-            colOffset = ( 2 * rowIx );
+          if (colIx % 2 === 0) {
+            colOffset = 2 * rowIx;
           } else {
-            colOffset = charsPerBlock - ( 2 * rowIx );
+            colOffset = charsPerBlock - 2 * rowIx;
           }
 
           charIx += colOffset;
-          console.log( 'rowIx:', rowIx, 'charIx:', charIx, 'colIx:', colIx, 'colOffset:', colOffset );
         }
       }
       colIx++;
+
       if (charIx < numChars) {
         output[outIx++] = s[charIx];
-      } else {
-        console.log('exceeding numChars:', charIx);
       }
     }
   }
 
-  return output.join('');
+  return output.join("");
 }

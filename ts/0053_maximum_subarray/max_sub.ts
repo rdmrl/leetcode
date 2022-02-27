@@ -9,48 +9,36 @@
  */
 
 export default function maxSubArray(nums: number[]): number {
-
   // Special case of a single element array.
   if(nums.length === 1) {
     return nums[0];
   }
 
-  const arraySum = nums.reduce((a, b) => a + b, 0);
-  console.log('arraySum:', arraySum, 'len:', nums.length);
+  // Use Neg Inf to allow all negative numbers as the input.
+  let bestSum = Number.NEGATIVE_INFINITY;
+  let bestStartIx = 0;
+  let bestEndIx = 0;
+  let curSum = 0;
 
-  let startIx = -1;
-  let endIx = -1;
-  let prevSubArraySum = arraySum;
-  let curSubArraySum = arraySum;
-  // Loop through the array and build the map of subarrays and their sums.
+  let curStartIx = 0;
+  let curEndIx = 0;
 
-  const MIN_SUB_ARRAY_SIZE = 2;
-
-  for(let ix = 0, jx = MIN_SUB_ARRAY_SIZE + 1; ix < nums.length - MIN_SUB_ARRAY_SIZE; ix++, jx++) {
-    console.log(ix, jx);
-    // const subArray = nums.slice( ix, ix + subWidth + 1);
-    // console.log(subArray);
-
-    /*
-    prevSubArraySum = curSubArraySum;
-    curSubArraySum -= nums[ix];
-
-    if( curSubArraySum < prevSubArraySum ) {
-      startIx = ix;
-      endIx = nums.length - 1;
+  for(let ix = 0; ix < nums.length; ix++ ) {
+    if(curSum <= 0) {
+      // Start a new sequence at the current element.
+      curStartIx = curEndIx;
+      curSum = nums[ix];
+    } else {
+      curSum += nums[ix];
     }
-    console.log(curSubArraySum, prevSubArraySum, startIx, endIx);
-    */
 
+    if(curSum > bestSum) {
+      bestSum = curSum;
+      bestStartIx = curStartIx;
+      bestEndIx = curEndIx + 1;
+    }
+    curEndIx++;
   }
 
-  /*
-  for(let ix = 0; ix < nums.length; ix++) {
-    const subArray = nums.slice( 0, ix + 1 );
-    console.log(subArray);
-  }
-  */
-
-
-  return 0;
+  return nums.slice(bestStartIx, bestEndIx).reduce((a, b) => a + b, 0);
 }

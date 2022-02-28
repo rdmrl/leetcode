@@ -5,11 +5,12 @@ export default function merge(nums1: number[], m: number, nums2: number[], n: nu
 
   // Start at the last valid element in nums1.
   let ix = Math.max(0, m - 1);
+  const offsetIx = m - 1;
 
   // Start at the last element in nums2.
   for(let jx = n - 1; jx >= 0; jx--) {
 
-    const ix1 = Math.min(ix, ix + jx + 1);
+    const ix1 = Math.min(ix, offsetIx + jx + 1);
     console.log(ix, nums1[ix], jx, nums2[jx]);
     if(nums1[ix] < nums2[jx]) {
       nums1[ix1] = nums2[jx];
